@@ -1,6 +1,6 @@
 package com.springframework.documentmanagementsystem.models;
 
-public class Message {
+public class Message extends BaseEntity{
 
     private String sender;
     private String receiver;

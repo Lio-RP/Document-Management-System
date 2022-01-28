@@ -1,6 +1,6 @@
 package com.springframework.documentmanagementsystem.models;
 
-public class Employee {
+public class Employee extends BaseEntity{
 
     private String firstName;
     private String lastName;

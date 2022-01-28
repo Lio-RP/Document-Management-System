@@ -2,7 +2,7 @@ package com.springframework.documentmanagementsystem.models;
 
 import java.time.LocalDate;
 
-public class Documents {
+public class Documents extends BaseEntity{
 
     private int registrationNumber;
     private LocalDate registrationDate;
