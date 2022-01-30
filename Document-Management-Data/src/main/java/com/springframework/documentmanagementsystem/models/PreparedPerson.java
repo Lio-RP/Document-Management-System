@@ -1,4 +1,4 @@
 package com.springframework.documentmanagementsystem.models;
 
-public class Prepared extends Employee{
+public class PreparedPerson extends Employee{
 }
