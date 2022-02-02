@@ -2,9 +2,11 @@ package com.springframework.documentmanagementsystem.services.map;
 
 import com.springframework.documentmanagementsystem.models.ExecutedPerson;
 import com.springframework.documentmanagementsystem.services.ExecutedPersonServices;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class ExecutedPersonServiceMap extends AbstractServiceMap<ExecutedPerson, Long> implements ExecutedPersonServices {
 
     @Override
