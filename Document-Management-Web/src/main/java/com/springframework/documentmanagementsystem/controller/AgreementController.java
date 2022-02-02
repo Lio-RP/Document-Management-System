@@ -1,13 +1,15 @@
 package com.springframework.documentmanagementsystem.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequestMapping("agreement")
 @Controller
-public class HomeController {
+public class AgreementController {
 
     @RequestMapping({"", "/", "/index", "/index.html"})
-    public String index(){
-        return "index";
+    public String getDocuments(Model model){
+        return "agreement/index";
     }
 }
