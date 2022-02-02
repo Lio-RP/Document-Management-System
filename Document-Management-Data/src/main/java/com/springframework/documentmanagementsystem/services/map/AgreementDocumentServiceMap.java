@@ -11,7 +11,7 @@ public class AgreementDocumentServiceMap extends AbstractServiceMap<AgreementDoc
 
     @Override
     public AgreementDocuments save(AgreementDocuments agreementDocuments) {
-        return super.save(agreementDocuments.getId(), agreementDocuments);
+        return super.save(agreementDocuments);
     }
 
     @Override

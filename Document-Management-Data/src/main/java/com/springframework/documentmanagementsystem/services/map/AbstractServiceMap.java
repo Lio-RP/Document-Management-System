@@ -1,13 +1,12 @@
 package com.springframework.documentmanagementsystem.services.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.springframework.documentmanagementsystem.models.BaseEntity;
 
-public abstract class AbstractServiceMap<T, ID> {
+import java.util.*;
 
-    protected Map<ID, T> map = new HashMap<>();
+public abstract class AbstractServiceMap<T extends BaseEntity, ID extends Long> {
+
+    protected Map<Long, T> map = new HashMap<>();
 
     Set<T> findAll(){
         return new HashSet<>(map.values());
@@ -17,8 +16,14 @@ public abstract class AbstractServiceMap<T, ID> {
         return map.get(id);
     }
 
-    T save(ID id, T object){
-        return map.put(id, object);
+    T save(T object){
+        if (object != null){
+            if (object.getId() == null){
+                object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
+        }
+        return object;
     }
 
     void deleteById(ID id){
@@ -27,5 +32,15 @@ public abstract class AbstractServiceMap<T, ID> {
 
     void delete(T object){
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
+    }
+
+    private Long getNextId(){
+        Long nextId = null;
+        try{
+            nextId = Collections.max(map.keySet()) + 1;
+        }catch (NoSuchElementException e){
+            nextId = 1L;
+        }
+        return nextId;
     }
 }

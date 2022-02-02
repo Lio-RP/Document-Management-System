@@ -11,7 +11,7 @@ public class PreparedPersonServiceMap extends AbstractServiceMap<PreparedPerson,
 
     @Override
     public PreparedPerson save(PreparedPerson prepared) {
-        return super.save(prepared.getId(), prepared);
+        return super.save(prepared);
     }
 
     @Override

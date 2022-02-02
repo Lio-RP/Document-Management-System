@@ -11,7 +11,7 @@ public class ExecutedPersonServiceMap extends AbstractServiceMap<ExecutedPerson,
 
     @Override
     public ExecutedPerson save(ExecutedPerson executor) {
-        return super.save(executor.getId(), executor);
+        return super.save(executor);
     }
 
     @Override

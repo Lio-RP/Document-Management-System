@@ -11,7 +11,7 @@ public class ServiceDocumentsServiceMap extends AbstractServiceMap<ServiceDocume
 
     @Override
     public ServiceDocuments save(ServiceDocuments serviceDocuments) {
-        return super.save(serviceDocuments.getId(), serviceDocuments);
+        return super.save(serviceDocuments);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class MessageServiceMap extends AbstractServiceMap<Message, Long> impleme
 
     @Override
     public Message save(Message message) {
-        return super.save(message.getId(), message);
+        return super.save(message);
     }
 
     @Override

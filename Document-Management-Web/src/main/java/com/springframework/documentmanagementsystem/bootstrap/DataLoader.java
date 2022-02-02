@@ -23,7 +23,6 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         AgreementDocuments agreementDocuments1 = new AgreementDocuments();
-        agreementDocuments1.setId(1L);
         agreementDocuments1.setRegistrationNumber(101);
         agreementDocuments1.setRegistrationDate(LocalDate.now());
         agreementDocuments1.setTypeDocument("Agreement");
@@ -41,7 +40,6 @@ public class DataLoader implements CommandLineRunner {
 
 
         AgreementDocuments agreementDocuments2 = new AgreementDocuments();
-        agreementDocuments2.setId(2L);
         agreementDocuments2.setRegistrationNumber(102);
         agreementDocuments2.setRegistrationDate(LocalDate.now());
         agreementDocuments2.setTypeDocument("Agreement");
