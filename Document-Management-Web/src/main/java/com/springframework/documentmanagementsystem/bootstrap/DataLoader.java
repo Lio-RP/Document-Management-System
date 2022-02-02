@@ -85,7 +85,7 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments2.setNumberSheets(3);
         serviceDocuments2.setSummery("This is service document for ordering service.");
 
-        serviceDocumentsServices.save(serviceDocuments1);
+        serviceDocumentsServices.save(serviceDocuments2);
 
         System.out.println("Service Documents Loaded.....");
     }
