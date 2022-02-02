@@ -1,11 +1,13 @@
 package com.springframework.documentmanagementsystem.services.map;
 
 import com.springframework.documentmanagementsystem.models.AgreementDocuments;
-import com.springframework.documentmanagementsystem.services.CrudServices;
+import com.springframework.documentmanagementsystem.services.AgreementDocumentsServices;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-public class AgreementDocumentServiceMap extends AbstractServiceMap<AgreementDocuments, Long> implements CrudServices<AgreementDocuments, Long> {
+@Service
+public class AgreementDocumentServiceMap extends AbstractServiceMap<AgreementDocuments, Long> implements AgreementDocumentsServices {
 
     @Override
     public AgreementDocuments save(AgreementDocuments agreementDocuments) {

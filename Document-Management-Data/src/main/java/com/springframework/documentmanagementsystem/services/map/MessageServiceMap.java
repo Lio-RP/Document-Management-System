@@ -1,11 +1,13 @@
 package com.springframework.documentmanagementsystem.services.map;
 
 import com.springframework.documentmanagementsystem.models.Message;
-import com.springframework.documentmanagementsystem.services.CrudServices;
+import com.springframework.documentmanagementsystem.services.MessageServices;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-public class MessageServiceMap extends AbstractServiceMap<Message, Long> implements CrudServices<Message, Long> {
+@Service
+public class MessageServiceMap extends AbstractServiceMap<Message, Long> implements MessageServices {
 
     @Override
     public Message save(Message message) {
@@ -31,5 +33,20 @@ public class MessageServiceMap extends AbstractServiceMap<Message, Long> impleme
     public void deleteById(Long id) {
         super.deleteById(id);
 
+    }
+
+    @Override
+    public Message findBySubject(String subject) {
+        return null;
+    }
+
+    @Override
+    public Message findBySender(String sender) {
+        return null;
+    }
+
+    @Override
+    public Message findByReceiver(String receiver) {
+        return null;
     }
 }

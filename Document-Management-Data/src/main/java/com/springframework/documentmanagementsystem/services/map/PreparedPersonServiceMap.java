@@ -1,11 +1,11 @@
 package com.springframework.documentmanagementsystem.services.map;
 
 import com.springframework.documentmanagementsystem.models.PreparedPerson;
-import com.springframework.documentmanagementsystem.services.CrudServices;
+import com.springframework.documentmanagementsystem.services.PreparedPersonServices;
 
 import java.util.Set;
 
-public class PreparedPersonServiceMap extends AbstractServiceMap<PreparedPerson, Long> implements CrudServices<PreparedPerson, Long> {
+public class PreparedPersonServiceMap extends AbstractServiceMap<PreparedPerson, Long> implements PreparedPersonServices {
 
     @Override
     public PreparedPerson save(PreparedPerson prepared) {
@@ -30,5 +30,10 @@ public class PreparedPersonServiceMap extends AbstractServiceMap<PreparedPerson,
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);
+    }
+
+    @Override
+    public PreparedPerson findByLastName(String lastName) {
+        return null;
     }
 }
