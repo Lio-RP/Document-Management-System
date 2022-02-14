@@ -1,10 +1,24 @@
 package com.springframework.documentmanagementsystem.models;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "posts")
 public class Message extends BaseEntity{
 
+    @Column(name = "sender")
     private String sender;
+
+    @Column(name = "receiver")
     private String receiver;
+
+    @Column(name = "subject")
     private String subject;
+
+    @Column(name = "message")
     private String message;
 
     public String getSender() {
