@@ -1,6 +1,6 @@
 package com.springframework.documentmanagementsystem.models;
 
-public class ExecutedPerson extends Employee{
+public class SignedPerson extends Employee{
 
     private String position;
 

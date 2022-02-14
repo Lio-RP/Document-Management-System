@@ -1,9 +1,13 @@
 package com.springframework.documentmanagementsystem.bootstrap;
 
 import com.springframework.documentmanagementsystem.models.AgreementDocuments;
+import com.springframework.documentmanagementsystem.models.PreparedPerson;
 import com.springframework.documentmanagementsystem.models.ServiceDocuments;
+import com.springframework.documentmanagementsystem.models.SignedPerson;
 import com.springframework.documentmanagementsystem.services.AgreementDocumentsServices;
+import com.springframework.documentmanagementsystem.services.PreparedPersonServices;
 import com.springframework.documentmanagementsystem.services.ServiceDocumentsServices;
+import com.springframework.documentmanagementsystem.services.SignedPersonServices;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,14 +17,38 @@ import java.time.LocalDate;
 public class DataLoader implements CommandLineRunner {
     private final AgreementDocumentsServices agreementDocumentsServices;
     private final ServiceDocumentsServices serviceDocumentsServices;
+    private final SignedPersonServices signedPersonServices;
+    private final PreparedPersonServices preparedPersonServices;
 
-    public DataLoader(AgreementDocumentsServices agreementDocumentsServices, ServiceDocumentsServices serviceDocumentsServices) {
+    public DataLoader(AgreementDocumentsServices agreementDocumentsServices,
+                      ServiceDocumentsServices serviceDocumentsServices,
+                      SignedPersonServices signedPersonServices,
+                      PreparedPersonServices preparedPersonServices) {
         this.agreementDocumentsServices = agreementDocumentsServices;
         this.serviceDocumentsServices = serviceDocumentsServices;
+        this.signedPersonServices = signedPersonServices;
+        this.preparedPersonServices = preparedPersonServices;
     }
 
     @Override
     public void run(String... args) throws Exception {
+
+        SignedPerson singedPerson = new SignedPerson();
+        singedPerson.setFirstName("Liban Abdullahi");
+        singedPerson.setLastName("Mohamed");
+        singedPerson.setEmail("libanr4243@gmail.com");
+        singedPerson.setPhone("+79964426139");
+        singedPerson.setPosition("Manager");
+
+        SignedPerson savedSingedPerson = signedPersonServices.save(singedPerson);
+
+        PreparedPerson preparedPerson = new PreparedPerson();
+        preparedPerson.setFirstName("Basro Abdulle");
+        preparedPerson.setLastName("Abubakar");
+        preparedPerson.setEmail("basraabdulle42@gmail.com");
+        preparedPerson.setPhone("+252615681777");
+
+        PreparedPerson savedPreparedPerson = preparedPersonServices.save(preparedPerson);
 
         AgreementDocuments agreementDocuments1 = new AgreementDocuments();
         agreementDocuments1.setRegistrationNumber(101);
@@ -31,6 +59,8 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments1.setDeadlineAgreement(LocalDate.now());
         agreementDocuments1.setContractor("Hormuud Company");
         agreementDocuments1.setAmount((long) 234.5);
+        agreementDocuments1.setSingedPerson(savedSingedPerson);
+        agreementDocuments1.setPreparedPerson(savedPreparedPerson);
         agreementDocuments1.setNumberSheets(4);
         agreementDocuments1.setSummery("This is agreement document for ordering service Hormud Company");
 
@@ -46,6 +76,8 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments2.setDeadlineAgreement(LocalDate.now());
         agreementDocuments2.setContractor("Somtel Company");
         agreementDocuments2.setAmount((long) 23445.55);
+        agreementDocuments2.setSingedPerson(savedSingedPerson);
+        agreementDocuments2.setPreparedPerson(savedPreparedPerson);
         agreementDocuments2.setNumberSheets(4);
         agreementDocuments2.setSummery("This is agreement document for ordering service Hormud Company");
 
@@ -60,6 +92,8 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments1.setRegistrationDate(LocalDate.now());
         serviceDocuments1.setTypeDocument("Service");
         serviceDocuments1.setStateDocument("Registering");
+        serviceDocuments1.setSingedPerson(savedSingedPerson);
+        serviceDocuments1.setPreparedPerson(savedPreparedPerson);
         serviceDocuments1.setNumberSheets(4);
         serviceDocuments1.setSummery("This is service document for ordering service.");
 
@@ -72,6 +106,8 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments2.setRegistrationDate(LocalDate.now());
         serviceDocuments2.setTypeDocument("Service");
         serviceDocuments2.setStateDocument("Executing");
+        serviceDocuments2.setSingedPerson(savedSingedPerson);
+        serviceDocuments2.setPreparedPerson(savedPreparedPerson);
         serviceDocuments2.setNumberSheets(3);
         serviceDocuments2.setSummery("This is service document for ordering service.");
 

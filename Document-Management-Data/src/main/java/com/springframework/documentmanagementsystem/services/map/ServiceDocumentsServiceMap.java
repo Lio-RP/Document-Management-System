@@ -1,7 +1,9 @@
 package com.springframework.documentmanagementsystem.services.map;
 
 import com.springframework.documentmanagementsystem.models.ServiceDocuments;
+import com.springframework.documentmanagementsystem.services.PreparedPersonServices;
 import com.springframework.documentmanagementsystem.services.ServiceDocumentsServices;
+import com.springframework.documentmanagementsystem.services.SignedPersonServices;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -9,9 +11,32 @@ import java.util.Set;
 @Service
 public class ServiceDocumentsServiceMap extends AbstractServiceMap<ServiceDocuments, Long> implements ServiceDocumentsServices {
 
+    private final SignedPersonServices signedPersonServices;
+    private final PreparedPersonServices preparedPersonServices;
+
+    public ServiceDocumentsServiceMap(SignedPersonServices signedPersonServices,
+                                      PreparedPersonServices preparedPersonServices) {
+        this.signedPersonServices = signedPersonServices;
+        this.preparedPersonServices = preparedPersonServices;
+    }
+
     @Override
-    public ServiceDocuments save(ServiceDocuments serviceDocuments) {
-        return super.save(serviceDocuments);
+    public ServiceDocuments save(ServiceDocuments object) {
+        if(object != null){
+            if(object.getSingedPerson() != null && object.getPreparedPerson() != null){
+                if(object.getSingedPerson().getId() == null |
+                        object.getPreparedPerson().getId() == null){
+                    object.setSingedPerson(signedPersonServices.save(object.getSingedPerson()));
+                    object.setPreparedPerson(preparedPersonServices.save(object.getPreparedPerson()));
+                }
+            }else{
+                throw new RuntimeException("Singed Person Or Prepared User Can Not Be Null!.");
+            }
+            return super.save(object);
+        }else{
+            throw new RuntimeException("Service Document Not Found!.");
+        }
+
     }
 
     @Override

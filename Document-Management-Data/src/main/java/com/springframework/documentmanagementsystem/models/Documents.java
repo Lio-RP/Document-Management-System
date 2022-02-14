@@ -20,7 +20,7 @@ public class Documents extends BaseEntity{
     private String stateDocument;
 
     private PreparedPerson preparedPerson;
-    private ExecutedPerson executedPerson;
+    private SignedPerson singedPerson;
 
     @Column(name = "number_sheets")
     private int numberSheets;
@@ -68,12 +68,12 @@ public class Documents extends BaseEntity{
         this.preparedPerson = preparedPerson;
     }
 
-    public ExecutedPerson getExecutedPerson() {
-        return executedPerson;
+    public SignedPerson getSingedPerson() {
+        return singedPerson;
     }
 
-    public void setExecutedPerson(ExecutedPerson executedPerson) {
-        this.executedPerson = executedPerson;
+    public void setSingedPerson(SignedPerson singedPerson) {
+        this.singedPerson = singedPerson;
     }
 
     public int getNumberSheets() {

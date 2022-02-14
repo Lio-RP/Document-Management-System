@@ -2,6 +2,8 @@ package com.springframework.documentmanagementsystem.services.map;
 
 import com.springframework.documentmanagementsystem.models.AgreementDocuments;
 import com.springframework.documentmanagementsystem.services.AgreementDocumentsServices;
+import com.springframework.documentmanagementsystem.services.PreparedPersonServices;
+import com.springframework.documentmanagementsystem.services.SignedPersonServices;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -9,9 +11,32 @@ import java.util.Set;
 @Service
 public class AgreementDocumentServiceMap extends AbstractServiceMap<AgreementDocuments, Long> implements AgreementDocumentsServices {
 
+    private final PreparedPersonServices preparedPersonServices;
+    private final SignedPersonServices signedPersonServices;
+
+    public AgreementDocumentServiceMap(PreparedPersonServices preparedPersonServices,
+                                       SignedPersonServices signedPersonServices) {
+        this.preparedPersonServices = preparedPersonServices;
+        this.signedPersonServices = signedPersonServices;
+    }
+
     @Override
-    public AgreementDocuments save(AgreementDocuments agreementDocuments) {
-        return super.save(agreementDocuments);
+    public AgreementDocuments save(AgreementDocuments object) {
+        if(object != null){
+            if(object.getSingedPerson() != null && object.getPreparedPerson() != null){
+                if(object.getSingedPerson().getId() == null |
+                        object.getPreparedPerson().getId() == null){
+                    object.setSingedPerson(signedPersonServices.save(object.getSingedPerson()));
+                    object.setPreparedPerson(preparedPersonServices.save(object.getPreparedPerson()));
+                }
+            }else{
+                throw new RuntimeException("Singed User or Prepared User Can Not be Null!.");
+            }
+            return super.save(object);
+        }else{
+            throw new RuntimeException("Agreement Document Not Found!.");
+        }
+
     }
 
     @Override
