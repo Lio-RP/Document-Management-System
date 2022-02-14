@@ -1,6 +1,8 @@
 package com.springframework.documentmanagementsystem.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
@@ -19,7 +21,10 @@ public class Documents extends BaseEntity{
     @Column(name = "state_document")
     private String stateDocument;
 
+    @ManyToOne(cascade = CascadeType.ALL)
     private PreparedPerson preparedPerson;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private SignedPerson singedPerson;
 
     @Column(name = "number_sheets")
