@@ -1,16 +1,31 @@
 package com.springframework.documentmanagementsystem.models;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
+@MappedSuperclass
 public class Documents extends BaseEntity{
 
+    @Column(name = "registration_number")
     private int registrationNumber;
+
+    @Column(name = "registration_date")
     private LocalDate registrationDate;
+
+    @Column(name = "type_document")
     private String typeDocument;
+
+    @Column(name = "state_document")
     private String stateDocument;
-    private String prepared;
-    private String executed;
+
+    private PreparedPerson preparedPerson;
+    private ExecutedPerson executedPerson;
+
+    @Column(name = "number_sheets")
     private int numberSheets;
+
+    @Column(name = "summery")
     private String summery;
 
     public int getRegistrationNumber() {
@@ -45,20 +60,20 @@ public class Documents extends BaseEntity{
         this.stateDocument = stateDocument;
     }
 
-    public String getPrepared() {
-        return prepared;
+    public PreparedPerson getPreparedPerson() {
+        return preparedPerson;
     }
 
-    public void setPrepared(String prepared) {
-        this.prepared = prepared;
+    public void setPreparedPerson(PreparedPerson preparedPerson) {
+        this.preparedPerson = preparedPerson;
     }
 
-    public String getExecuted() {
-        return executed;
+    public ExecutedPerson getExecutedPerson() {
+        return executedPerson;
     }
 
-    public void setExecuted(String executed) {
-        this.executed = executed;
+    public void setExecutedPerson(ExecutedPerson executedPerson) {
+        this.executedPerson = executedPerson;
     }
 
     public int getNumberSheets() {

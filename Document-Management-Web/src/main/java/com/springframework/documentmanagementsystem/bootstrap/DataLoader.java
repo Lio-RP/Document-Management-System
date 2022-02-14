@@ -31,8 +31,6 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments1.setDeadlineAgreement(LocalDate.now());
         agreementDocuments1.setContractor("Hormuud Company");
         agreementDocuments1.setAmount((long) 234.5);
-        agreementDocuments1.setPrepared("Liban Abdullahi");
-        agreementDocuments1.setExecuted("Abdullahi Mohamed");
         agreementDocuments1.setNumberSheets(4);
         agreementDocuments1.setSummery("This is agreement document for ordering service Hormud Company");
 
@@ -48,8 +46,6 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments2.setDeadlineAgreement(LocalDate.now());
         agreementDocuments2.setContractor("Somtel Company");
         agreementDocuments2.setAmount((long) 23445.55);
-        agreementDocuments2.setPrepared("Liban Abdullahi");
-        agreementDocuments2.setExecuted("Abdullahi Mohamed");
         agreementDocuments2.setNumberSheets(4);
         agreementDocuments2.setSummery("This is agreement document for ordering service Hormud Company");
 
@@ -64,8 +60,6 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments1.setRegistrationDate(LocalDate.now());
         serviceDocuments1.setTypeDocument("Service");
         serviceDocuments1.setStateDocument("Registering");
-        serviceDocuments1.setPrepared("Liban Abdullahi");
-        serviceDocuments1.setExecuted("Abdullahi Mohamed");
         serviceDocuments1.setNumberSheets(4);
         serviceDocuments1.setSummery("This is service document for ordering service.");
 
@@ -78,8 +72,6 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments2.setRegistrationDate(LocalDate.now());
         serviceDocuments2.setTypeDocument("Service");
         serviceDocuments2.setStateDocument("Executing");
-        serviceDocuments2.setPrepared("Liban Abdullahi");
-        serviceDocuments2.setExecuted("Abdullahi Mohamed");
         serviceDocuments2.setNumberSheets(3);
         serviceDocuments2.setSummery("This is service document for ordering service.");
 
