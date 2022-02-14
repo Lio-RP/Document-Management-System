@@ -2,11 +2,13 @@ package com.springframework.documentmanagementsystem.services.map;
 
 import com.springframework.documentmanagementsystem.models.PreparedPerson;
 import com.springframework.documentmanagementsystem.services.PreparedPersonServices;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "mapservices"})
 public class PreparedPersonServiceMap extends AbstractServiceMap<PreparedPerson, Long> implements PreparedPersonServices {
 
     @Override

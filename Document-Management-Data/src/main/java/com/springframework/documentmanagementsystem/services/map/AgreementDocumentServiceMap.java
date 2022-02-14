@@ -4,11 +4,13 @@ import com.springframework.documentmanagementsystem.models.AgreementDocuments;
 import com.springframework.documentmanagementsystem.services.AgreementDocumentsServices;
 import com.springframework.documentmanagementsystem.services.PreparedPersonServices;
 import com.springframework.documentmanagementsystem.services.SignedPersonServices;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "mapservices"})
 public class AgreementDocumentServiceMap extends AbstractServiceMap<AgreementDocuments, Long> implements AgreementDocumentsServices {
 
     private final PreparedPersonServices preparedPersonServices;

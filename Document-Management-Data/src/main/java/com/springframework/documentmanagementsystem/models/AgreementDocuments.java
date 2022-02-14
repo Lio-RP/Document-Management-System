@@ -52,4 +52,5 @@ public class AgreementDocuments extends Documents{
     public void setAmount(long amount) {
         this.amount = amount;
     }
+
 }

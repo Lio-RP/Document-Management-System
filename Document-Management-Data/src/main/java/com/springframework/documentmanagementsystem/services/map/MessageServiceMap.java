@@ -2,11 +2,13 @@ package com.springframework.documentmanagementsystem.services.map;
 
 import com.springframework.documentmanagementsystem.models.Message;
 import com.springframework.documentmanagementsystem.services.MessageServices;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "mapservices"})
 public class MessageServiceMap extends AbstractServiceMap<Message, Long> implements MessageServices {
 
     @Override

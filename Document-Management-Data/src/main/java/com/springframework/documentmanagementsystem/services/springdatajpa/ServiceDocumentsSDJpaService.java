@@ -3,12 +3,14 @@ package com.springframework.documentmanagementsystem.services.springdatajpa;
 import com.springframework.documentmanagementsystem.models.ServiceDocuments;
 import com.springframework.documentmanagementsystem.repositories.ServiceDocumentsRepository;
 import com.springframework.documentmanagementsystem.services.ServiceDocumentsServices;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Profile("springdatajpa")
 public class ServiceDocumentsSDJpaService implements ServiceDocumentsServices {
 
     private final ServiceDocumentsRepository serviceDocumentsRepository;

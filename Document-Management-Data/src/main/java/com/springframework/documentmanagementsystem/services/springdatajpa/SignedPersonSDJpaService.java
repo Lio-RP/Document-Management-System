@@ -3,12 +3,14 @@ package com.springframework.documentmanagementsystem.services.springdatajpa;
 import com.springframework.documentmanagementsystem.models.SignedPerson;
 import com.springframework.documentmanagementsystem.repositories.SignedPersonRepository;
 import com.springframework.documentmanagementsystem.services.SignedPersonServices;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Profile("springdatajpa")
 public class SignedPersonSDJpaService implements SignedPersonServices {
 
     private final SignedPersonRepository signedPersonRepository;

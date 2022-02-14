@@ -33,14 +33,14 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        SignedPerson singedPerson = new SignedPerson();
-        singedPerson.setFirstName("Liban Abdullahi");
-        singedPerson.setLastName("Mohamed");
-        singedPerson.setEmail("libanr4243@gmail.com");
-        singedPerson.setPhone("+79964426139");
-        singedPerson.setPosition("Manager");
+        SignedPerson signedPerson = new SignedPerson();
+        signedPerson.setFirstName("Liban Abdullahi");
+        signedPerson.setLastName("Mohamed");
+        signedPerson.setEmail("libanr4243@gmail.com");
+        signedPerson.setPhone("+79964426139");
+        signedPerson.setPosition("Manager");
 
-        SignedPerson savedSingedPerson = signedPersonServices.save(singedPerson);
+        SignedPerson savedSingedPerson = signedPersonServices.save(signedPerson);
 
         PreparedPerson preparedPerson = new PreparedPerson();
         preparedPerson.setFirstName("Basro Abdulle");
@@ -59,8 +59,8 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments1.setDeadlineAgreement(LocalDate.now());
         agreementDocuments1.setContractor("Hormuud Company");
         agreementDocuments1.setAmount((long) 234.5);
-        agreementDocuments1.setSingedPerson(savedSingedPerson);
-        agreementDocuments1.setPreparedPerson(savedPreparedPerson);
+        agreementDocuments1.setSingedPerson(signedPerson);
+        agreementDocuments1.setPreparedPerson(preparedPerson);
         agreementDocuments1.setNumberSheets(4);
         agreementDocuments1.setSummery("This is agreement document for ordering service Hormud Company");
 
@@ -76,8 +76,8 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments2.setDeadlineAgreement(LocalDate.now());
         agreementDocuments2.setContractor("Somtel Company");
         agreementDocuments2.setAmount((long) 23445.55);
-        agreementDocuments2.setSingedPerson(savedSingedPerson);
-        agreementDocuments2.setPreparedPerson(savedPreparedPerson);
+        agreementDocuments2.setSingedPerson(signedPerson);
+        agreementDocuments2.setPreparedPerson(preparedPerson);
         agreementDocuments2.setNumberSheets(4);
         agreementDocuments2.setSummery("This is agreement document for ordering service Hormud Company");
 
@@ -92,8 +92,8 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments1.setRegistrationDate(LocalDate.now());
         serviceDocuments1.setTypeDocument("Service");
         serviceDocuments1.setStateDocument("Registering");
-        serviceDocuments1.setSingedPerson(savedSingedPerson);
-        serviceDocuments1.setPreparedPerson(savedPreparedPerson);
+        serviceDocuments1.setSingedPerson(signedPerson);
+        serviceDocuments1.setPreparedPerson(preparedPerson);
         serviceDocuments1.setNumberSheets(4);
         serviceDocuments1.setSummery("This is service document for ordering service.");
 
@@ -106,8 +106,8 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments2.setRegistrationDate(LocalDate.now());
         serviceDocuments2.setTypeDocument("Service");
         serviceDocuments2.setStateDocument("Executing");
-        serviceDocuments2.setSingedPerson(savedSingedPerson);
-        serviceDocuments2.setPreparedPerson(savedPreparedPerson);
+        serviceDocuments2.setSingedPerson(signedPerson);
+        serviceDocuments2.setPreparedPerson(preparedPerson);
         serviceDocuments2.setNumberSheets(3);
         serviceDocuments2.setSummery("This is service document for ordering service.");
 

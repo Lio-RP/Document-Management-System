@@ -1,7 +1,7 @@
 package com.springframework.documentmanagementsystem.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
@@ -21,11 +21,13 @@ public class Documents extends BaseEntity{
     @Column(name = "state_document")
     private String stateDocument;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private PreparedPerson preparedPerson;
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "signed_person_id")
     private SignedPerson singedPerson;
+
+    @ManyToOne
+    @JoinColumn(name = "prepared_person_id")
+    private PreparedPerson preparedPerson;
 
     @Column(name = "number_sheets")
     private int numberSheets;
@@ -65,20 +67,20 @@ public class Documents extends BaseEntity{
         this.stateDocument = stateDocument;
     }
 
-    public PreparedPerson getPreparedPerson() {
-        return preparedPerson;
-    }
-
-    public void setPreparedPerson(PreparedPerson preparedPerson) {
-        this.preparedPerson = preparedPerson;
-    }
-
     public SignedPerson getSingedPerson() {
         return singedPerson;
     }
 
     public void setSingedPerson(SignedPerson singedPerson) {
         this.singedPerson = singedPerson;
+    }
+
+    public PreparedPerson getPreparedPerson() {
+        return preparedPerson;
+    }
+
+    public void setPreparedPerson(PreparedPerson preparedPerson) {
+        this.preparedPerson = preparedPerson;
     }
 
     public int getNumberSheets() {
