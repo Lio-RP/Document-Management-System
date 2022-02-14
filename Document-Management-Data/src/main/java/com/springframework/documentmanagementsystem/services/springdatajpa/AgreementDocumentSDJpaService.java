@@ -3,10 +3,12 @@ package com.springframework.documentmanagementsystem.services.springdatajpa;
 import com.springframework.documentmanagementsystem.models.AgreementDocuments;
 import com.springframework.documentmanagementsystem.repositories.AgreementDocumentRepository;
 import com.springframework.documentmanagementsystem.services.AgreementDocumentsServices;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class AgreementDocumentSDJpaService implements AgreementDocumentsServices {
 
     private final AgreementDocumentRepository agreementDocumentRepository;
