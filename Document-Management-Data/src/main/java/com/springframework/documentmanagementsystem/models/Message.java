@@ -1,13 +1,30 @@
 package com.springframework.documentmanagementsystem.models;
 
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "posts")
 public class Message extends BaseEntity{
+
+    @Builder
+    public Message(Long id, String sender, String receiver, String subject, String message) {
+        super(id);
+        this.sender = sender;
+        this.receiver = receiver;
+        this.subject = subject;
+        this.message = message;
+    }
 
     @Column(name = "sender")
     private String sender;
@@ -20,36 +37,4 @@ public class Message extends BaseEntity{
 
     @Column(name = "message")
     private String message;
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public String getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

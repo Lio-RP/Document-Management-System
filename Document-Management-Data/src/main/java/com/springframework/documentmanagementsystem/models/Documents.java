@@ -1,13 +1,36 @@
 package com.springframework.documentmanagementsystem.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @MappedSuperclass
 public class Documents extends BaseEntity{
+
+    public Documents(Long id, int registrationNumber, LocalDate registrationDate,
+                     String typeDocument, String stateDocument, SignedPerson singedPerson,
+                     PreparedPerson preparedPerson, int numberSheets, String summery) {
+        super(id);
+        this.registrationNumber = registrationNumber;
+        this.registrationDate = registrationDate;
+        this.typeDocument = typeDocument;
+        this.stateDocument = stateDocument;
+        this.singedPerson = singedPerson;
+        this.preparedPerson = preparedPerson;
+        this.numberSheets = numberSheets;
+        this.summery = summery;
+    }
 
     @Column(name = "registration_number")
     private int registrationNumber;
@@ -35,67 +58,4 @@ public class Documents extends BaseEntity{
     @Column(name = "summery")
     private String summery;
 
-    public int getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(int registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
-    public LocalDate getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public String getTypeDocument() {
-        return typeDocument;
-    }
-
-    public void setTypeDocument(String typeDocument) {
-        this.typeDocument = typeDocument;
-    }
-
-    public String getStateDocument() {
-        return stateDocument;
-    }
-
-    public void setStateDocument(String stateDocument) {
-        this.stateDocument = stateDocument;
-    }
-
-    public SignedPerson getSingedPerson() {
-        return singedPerson;
-    }
-
-    public void setSingedPerson(SignedPerson singedPerson) {
-        this.singedPerson = singedPerson;
-    }
-
-    public PreparedPerson getPreparedPerson() {
-        return preparedPerson;
-    }
-
-    public void setPreparedPerson(PreparedPerson preparedPerson) {
-        this.preparedPerson = preparedPerson;
-    }
-
-    public int getNumberSheets() {
-        return numberSheets;
-    }
-
-    public void setNumberSheets(int numberSheets) {
-        this.numberSheets = numberSheets;
-    }
-
-    public String getSummery() {
-        return summery;
-    }
-
-    public void setSummery(String summery) {
-        this.summery = summery;
-    }
 }
