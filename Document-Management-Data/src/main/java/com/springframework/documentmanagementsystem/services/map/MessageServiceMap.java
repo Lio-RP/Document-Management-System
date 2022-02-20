@@ -39,16 +39,27 @@ public class MessageServiceMap extends AbstractServiceMap<Message, Long> impleme
 
     @Override
     public Message findBySubject(String subject) {
+        boolean message;
+        Set<Message> posts = this.findAll();
+        for(Message post : posts){
+            message = post.getSubject().equalsIgnoreCase(subject);
+            if(message){
+                return post;
+            }
+        }
         return null;
     }
 
     @Override
     public Message findBySender(String sender) {
-        return null;
-    }
-
-    @Override
-    public Message findByReceiver(String receiver) {
+        boolean sendBy;
+        Set<Message> posts = this.findAll();
+        for(Message post : posts){
+            sendBy = post.getSender().equalsIgnoreCase(sender);
+            if(sendBy){
+                return post;
+            }
+        }
         return null;
     }
 }

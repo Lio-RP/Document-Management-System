@@ -55,9 +55,4 @@ public class MessageSDJpaService implements MessageServices {
     public Message findBySender(String sender) {
         return postsRepository.findBySender(sender).orElse(null);
     }
-
-    @Override
-    public Message findByReceiver(String receiver) {
-        return postsRepository.findByReceiver(receiver).orElse(null);
-    }
 }
