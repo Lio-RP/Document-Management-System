@@ -29,16 +29,8 @@ class MessageControllerTest {
     @Test
     void getMessages() throws Exception {
 
-        mockMvc.perform(get("/messages"))
+        mockMvc.perform(get("/posts/listPosts"))
                 .andExpect(status().is(200))
-                .andExpect(view().name("messages/index"));
-    }
-
-    @Test
-    void getMessagesByIndex() throws Exception {
-
-        mockMvc.perform(get("/messages/index"))
-                .andExpect(status().isOk())
                 .andExpect(view().name("messages/index"));
     }
 }

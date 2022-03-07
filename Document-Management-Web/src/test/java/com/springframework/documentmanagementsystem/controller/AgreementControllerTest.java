@@ -54,17 +54,7 @@ class AgreementControllerTest {
     void getDocuments() throws Exception {
         when(agreementDocumentsServices.findAll()).thenReturn(agreementDocuments);
 
-        mockMvc.perform(get("/agreement"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("agreement/index"))
-                .andExpect(model().attribute("listDocuments", hasSize(2)));
-    }
-
-    @Test
-    void getDocumentsByIndex() throws Exception {
-        when(agreementDocumentsServices.findAll()).thenReturn(agreementDocuments);
-
-        mockMvc.perform(get("/agreement/index"))
+        mockMvc.perform(get("/Documents/agreementDocuments"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("agreement/index"))
                 .andExpect(model().attribute("listDocuments", hasSize(2)));

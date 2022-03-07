@@ -1,13 +1,14 @@
 package com.springframework.documentmanagementsystem.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("messages")
+@RequestMapping("/posts")
 @Controller
 public class MessageController {
 
-    @RequestMapping({"", "/", "/index", "/index.html"})
+    @GetMapping("/listPosts")
     public String getMessages(){
 
         return "messages/index";
