@@ -26,10 +26,10 @@ public class AgreementDocumentServiceMap extends AbstractServiceMap<AgreementDoc
     @Override
     public AgreementDocuments save(AgreementDocuments object) {
         if(object != null){
-            if(object.getSingedPerson() != null && object.getPreparedPerson() != null){
-                if(object.getSingedPerson().getId() == null |
+            if(object.getSignedPerson() != null && object.getPreparedPerson() != null){
+                if(object.getSignedPerson().getId() == null |
                         object.getPreparedPerson().getId() == null){
-                    object.setSingedPerson(signedPersonServices.save(object.getSingedPerson()));
+                    object.setSignedPerson(signedPersonServices.save(object.getSignedPerson()));
                     object.setPreparedPerson(preparedPersonServices.save(object.getPreparedPerson()));
                 }
             }else{

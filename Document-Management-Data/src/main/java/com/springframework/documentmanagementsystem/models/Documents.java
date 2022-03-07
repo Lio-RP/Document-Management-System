@@ -26,7 +26,7 @@ public class Documents extends BaseEntity{
         this.registrationDate = registrationDate;
         this.typeDocument = typeDocument;
         this.stateDocument = stateDocument;
-        this.singedPerson = singedPerson;
+        this.signedPerson = singedPerson;
         this.preparedPerson = preparedPerson;
         this.numberSheets = numberSheets;
         this.summery = summery;
@@ -46,7 +46,7 @@ public class Documents extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "signed_person_id")
-    private SignedPerson singedPerson;
+    private SignedPerson signedPerson;
 
     @ManyToOne
     @JoinColumn(name = "prepared_person_id")

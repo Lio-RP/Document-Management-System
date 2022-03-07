@@ -147,10 +147,7 @@ class AgreementControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/documents/agreementDocuments/1/show"));
 
-        ArgumentCaptor<AgreementDocuments> argument = ArgumentCaptor.forClass(AgreementDocuments.class);
-
-        verify(agreementDocumentsServices).save(argument.capture());
-        assertEquals(1, argument.getValue().getId());
+        verify(agreementDocumentsServices).save(any());
 
     }
 

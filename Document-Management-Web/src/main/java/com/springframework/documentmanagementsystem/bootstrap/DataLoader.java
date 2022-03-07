@@ -59,7 +59,7 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments1.setDeadlineAgreement(LocalDate.now());
         agreementDocuments1.setContractor("Hormuud Company");
         agreementDocuments1.setAmount((long) 234.5);
-        agreementDocuments1.setSingedPerson(signedPerson);
+        agreementDocuments1.setSignedPerson(signedPerson);
         agreementDocuments1.setPreparedPerson(preparedPerson);
         agreementDocuments1.setNumberSheets(4);
         agreementDocuments1.setSummery("This is agreement document for ordering service Hormud Company");
@@ -76,7 +76,7 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments2.setDeadlineAgreement(LocalDate.now());
         agreementDocuments2.setContractor("Somtel Company");
         agreementDocuments2.setAmount((long) 23445.55);
-        agreementDocuments2.setSingedPerson(signedPerson);
+        agreementDocuments2.setSignedPerson(signedPerson);
         agreementDocuments2.setPreparedPerson(preparedPerson);
         agreementDocuments2.setNumberSheets(4);
         agreementDocuments2.setSummery("This is agreement document for ordering service Hormud Company");
@@ -92,7 +92,7 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments1.setRegistrationDate(LocalDate.now());
         serviceDocuments1.setTypeDocument("Service");
         serviceDocuments1.setStateDocument("Registering");
-        serviceDocuments1.setSingedPerson(signedPerson);
+        serviceDocuments1.setSignedPerson(signedPerson);
         serviceDocuments1.setPreparedPerson(preparedPerson);
         serviceDocuments1.setNumberSheets(4);
         serviceDocuments1.setSummery("This is service document for ordering service.");
@@ -106,7 +106,7 @@ public class DataLoader implements CommandLineRunner {
         serviceDocuments2.setRegistrationDate(LocalDate.now());
         serviceDocuments2.setTypeDocument("Service");
         serviceDocuments2.setStateDocument("Executing");
-        serviceDocuments2.setSingedPerson(signedPerson);
+        serviceDocuments2.setSignedPerson(signedPerson);
         serviceDocuments2.setPreparedPerson(preparedPerson);
         serviceDocuments2.setNumberSheets(3);
         serviceDocuments2.setSummery("This is service document for ordering service.");

@@ -14,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -97,7 +98,20 @@ public class AgreementController {
 
     @GetMapping("/new")
     public String initCreationDocumentForm(Model model){
-        model.addAttribute("document", AgreementDocuments.builder().build());
+        AgreementDocuments agreementDocuments = AgreementDocuments.builder().build();
+
+        //init preparedPerson
+        agreementDocuments.setPreparedPerson(new PreparedPerson());
+
+        //init SignedPerson
+        agreementDocuments.setSignedPerson(new SignedPerson());
+
+        //set date and times:
+        //To do................
+        agreementDocuments.setRegistrationDate(LocalDate.now());
+        agreementDocuments.setDeadlineAgreement(LocalDate.now());
+
+        model.addAttribute("document", agreementDocuments);
         return "agreement/createOrUpdateDocument";
     }
 

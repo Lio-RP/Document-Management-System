@@ -18,7 +18,7 @@
             <label class="col-sm-2 col-form-label">Registration Date</label>
             <div class="col-sm-10">
                 <input class="form-control" th:field="*{registrationDate}" size="30"
-                       maxlength="80" type="datetime-local"/>
+                       maxlength="80" type="hidden"/>
             </div>
         </div>
         <div class="form-group row">
@@ -38,7 +38,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Prepared By</label>
             <div class="col-sm-10">
-                <select th:field="*{preparedPerson}">
+                <select class="form-control" th:field="*{preparedPerson}">
                     <option
                             th:each="user : ${listPreparedPerson}"
                             th:value="${user}"
@@ -49,11 +49,12 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Signed By</label>
             <div class="col-sm-10">
-                <select th:field="*{singedPerson}">
+                <select class="form-control" th:field="*{signedPerson}">
                     <option
                             th:each="user : ${listSignedPerson}"
-                            th:value="${user}"
-                            th:text="${user}"></option>
+                            th:value="${user.id}"
+                            th:selected="${user.id.equals(document.preparedPerson.id)}"
+                            th:text="${user.firstName + ' ' + user.lastName}"></option>
                 </select>
             </div>
         </div>
@@ -75,7 +76,7 @@
             <label class="col-sm-2 col-form-label">Deadline Agreement</label>
             <div class="col-sm-10">
                 <input class="form-control" th:field="*{deadlineAgreement}" size="30"
-                       maxlength="80" type="datetime-local"/>
+                       maxlength="80" type="hidden"/>
             </div>
         </div>
         <div class="form-group row">
