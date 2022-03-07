@@ -147,4 +147,10 @@ public class AgreementController {
         }
 
     }
+
+    @GetMapping("/{id}/delete")
+    public String deleteDocument(@PathVariable("id") Long id){
+        agreementDocumentsServices.deleteById(id);
+        return "redirect:/documents/agreementDocuments/list";
+    }
 }

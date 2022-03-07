@@ -6,7 +6,7 @@
     <title>View Agreement Document</title>
 </head>
 <body>
-    <h2>Agreement Document Information</h2>
+    <h2 style="margin-top: 20px; margin-bottom: 10px">Agreement Document Information</h2>
 
 
     <table class="table table-striped" th:object="${document}" >
@@ -59,8 +59,9 @@
             <td th:text="*{summery}"></td>
         </tr>
     </table>
-
+    <br>
     <a href="#" th:href="@{'/documents/agreementDocuments/' + ${id} + '/edit'}" class="btn btn-primary">Edit Document</a>
     <a href="#" th:href="@{'/documents/agreementDocuments/' + ${id} + '/delete'}" class="btn btn-primary">Delete Document</a>
+    <br><br>
 </body>
 </html>

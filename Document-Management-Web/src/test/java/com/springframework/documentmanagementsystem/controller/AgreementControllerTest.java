@@ -192,4 +192,14 @@ class AgreementControllerTest {
         assertEquals(1, argument.getValue().getId());
 
     }
+
+    @Test
+    void deleteDocument() throws Exception {
+
+        mockMvc.perform(get("/documents/agreementDocuments/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/documents/agreementDocuments/list"));
+
+        verify(agreementDocumentsServices).deleteById(anyLong());
+    }
 }
