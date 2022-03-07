@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'documents')}">
+
+<body>
+
+    <h2>Document</h2>
+
+    <form th:object="${document}" method="post">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Registration Number</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{registrationNumber}" size="30"
+                       maxlength="80" type="number"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Registration Date</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{registrationDate}" size="30"
+                       maxlength="80" type="datetime-local"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Type Document</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{typeDocument}" size="30"
+                       maxlength="80" type="text"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">State Document</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{stateDocument}" size="30"
+                       maxlength="80" type="text"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Prepared By</label>
+            <div class="col-sm-10">
+                <select th:field="*{preparedPerson}">
+                    <option
+                            th:each="user : ${listPreparedPerson}"
+                            th:value="${user}"
+                            th:text="${user}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Signed By</label>
+            <div class="col-sm-10">
+                <select th:field="*{singedPerson}">
+                    <option
+                            th:each="user : ${listSignedPerson}"
+                            th:value="${user}"
+                            th:text="${user}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">numberSheets</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{numberSheets}" size="30"
+                       maxlength="80" type="number"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Type Agreement</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{typeAgreement}" size="30"
+                       maxlength="80" type="text"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Deadline Agreement</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{deadlineAgreement}" size="30"
+                       maxlength="80" type="datetime-local"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">contractor</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{contractor}" size="30"
+                       maxlength="80" type="text"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Amount</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{amount}" size="30"
+                       maxlength="80" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <input class="form-control" th:field="*{summery}" size="30"
+                       maxlength="80" type="text"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button
+                        th:with="text=${document['new']} ? 'Add Document' : 'Update Document'"
+                        class="btn btn-primary" type="submit" th:text="${text}">Add
+                    Document</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

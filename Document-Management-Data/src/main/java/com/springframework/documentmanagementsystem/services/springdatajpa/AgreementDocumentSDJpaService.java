@@ -3,6 +3,7 @@ package com.springframework.documentmanagementsystem.services.springdatajpa;
 import com.springframework.documentmanagementsystem.models.AgreementDocuments;
 import com.springframework.documentmanagementsystem.repositories.AgreementDocumentRepository;
 import com.springframework.documentmanagementsystem.services.AgreementDocumentsServices;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @Service
 @Profile("springdatajpa")
 public class AgreementDocumentSDJpaService implements AgreementDocumentsServices {
@@ -22,6 +24,7 @@ public class AgreementDocumentSDJpaService implements AgreementDocumentsServices
 
     @Override
     public AgreementDocuments save(AgreementDocuments object) {
+        log.debug("Document Saved................");
         return agreementDocumentRepository.save(object);
     }
 

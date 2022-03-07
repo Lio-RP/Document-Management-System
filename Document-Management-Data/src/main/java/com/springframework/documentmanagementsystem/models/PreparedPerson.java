@@ -16,4 +16,6 @@ public class PreparedPerson extends Employee{
     public PreparedPerson(Long id, String firstName, String lastName, String email, String phone) {
         super(id, firstName, lastName, email, phone);
     }
+
+
 }
