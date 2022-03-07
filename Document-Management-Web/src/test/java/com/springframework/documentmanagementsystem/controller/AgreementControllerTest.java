@@ -13,11 +13,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -55,7 +57,7 @@ class AgreementControllerTest {
     void getDocuments() throws Exception {
         when(agreementDocumentsServices.findAll()).thenReturn(agreementDocuments);
 
-        mockMvc.perform(get("/documents/agreementDocuments"))
+        mockMvc.perform(get("/documents/agreementDocuments/list"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("agreement/agreementDocumentList"))
                 .andExpect(model().attribute("listDocuments", hasSize(2)));
@@ -65,9 +67,39 @@ class AgreementControllerTest {
     void showDocument() throws Exception {
         when(agreementDocumentsServices.findById(anyLong())).thenReturn(AgreementDocuments.builder().id(1L).build());
         
-        mockMvc.perform(get("/documents/agreementDocument/1/show"))
+        mockMvc.perform(get("/documents/agreementDocuments/1/show"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("agreement/documentDetails"))
                 .andExpect(model().attributeExists("document"));
+    }
+
+    @Test
+    void initFindDocumentForm() throws Exception {
+
+        mockMvc.perform(get("/documents/agreementDocuments/find"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("agreement/findDocument"))
+                .andExpect(model().attributeExists("document"));
+    }
+
+    @Test
+    void processFindDocumentFormReturnOne() throws Exception {
+        when(agreementDocumentsServices.findByContractorLike(anyString())).thenReturn(Arrays.asList(AgreementDocuments.builder().id(1L).build()));
+
+        mockMvc.perform(get("/documents/agreementDocuments"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/documents/agreementDocuments/1/show"));
+    }
+
+    @Test
+    void processFindDocumentFormReturnMany() throws Exception {
+        when(agreementDocumentsServices.findByContractorLike(anyString()))
+                .thenReturn(Arrays.asList(AgreementDocuments.builder().id(1L).build(),
+                        AgreementDocuments.builder().id(2L).build()));
+
+        mockMvc.perform(get("/documents/agreementDocuments"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("agreement/agreementDocumentList"))
+                .andExpect(model().attribute("listDocuments", hasSize(2)));
     }
 }

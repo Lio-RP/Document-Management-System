@@ -29,7 +29,7 @@
         a{
             color: #5fa134;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 15px;
         }
         a:hover{
             color: #5fa134;
@@ -74,11 +74,11 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#"
-                            th:href="@{'/documents/agreementDocuments'}">
+                            th:href="@{'/documents/agreementDocuments/list'}">
                             <span th:text="'Agreement Document'">Agreement Document</span>
                         </a>
                         <a class="dropdown-item"
-                           th:href="@{'/documents/serviceDocuments'}" href="#">
+                           th:href="@{'/documents/serviceDocuments/list'}" href="#">
                             <span th:text="'Service Document'">Service Document</span>
                         </a>
                     </div>

@@ -23,7 +23,7 @@
             <tr th:each="document : ${listDocuments}">
 
                 <td>
-                    <a href="#" th:href="@{'/documents/agreementDocument/' + ${document.getId()} + '/show'}" th:text="${document.registrationNumber}" ></a>
+                    <a href="#" th:href="@{'/documents/agreementDocuments/' + ${document.getId()} + '/show'}" th:text="${document.registrationNumber}" ></a>
                 </td>
                 <td th:text="${document.registrationDate}"></td>
                 <td th:text="${document.typeDocument}"></td>

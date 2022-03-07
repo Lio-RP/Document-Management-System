@@ -7,6 +7,7 @@ import com.springframework.documentmanagementsystem.services.SignedPersonService
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -59,5 +60,11 @@ public class AgreementDocumentServiceMap extends AbstractServiceMap<AgreementDoc
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);
+    }
+
+    @Override
+    public List<AgreementDocuments> findByContractorLike(String contractor) {
+        //TO DO....
+        return null;
     }
 }

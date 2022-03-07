@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -44,5 +45,10 @@ public class AgreementDocumentSDJpaService implements AgreementDocumentsServices
     @Override
     public void deleteById(Long aLong) {
         agreementDocumentRepository.deleteById(aLong);
+    }
+
+    @Override
+    public List<AgreementDocuments> findByContractorLike(String contractor) {
+        return agreementDocumentRepository.findByContractorLike(contractor);
     }
 }
