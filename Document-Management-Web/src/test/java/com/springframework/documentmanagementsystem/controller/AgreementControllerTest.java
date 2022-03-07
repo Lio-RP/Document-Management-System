@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -54,9 +55,19 @@ class AgreementControllerTest {
     void getDocuments() throws Exception {
         when(agreementDocumentsServices.findAll()).thenReturn(agreementDocuments);
 
-        mockMvc.perform(get("/Documents/agreementDocuments"))
+        mockMvc.perform(get("/documents/agreementDocuments"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("agreement/index"))
+                .andExpect(view().name("agreement/agreementDocumentList"))
                 .andExpect(model().attribute("listDocuments", hasSize(2)));
+    }
+    
+    @Test
+    void showDocument() throws Exception {
+        when(agreementDocumentsServices.findById(anyLong())).thenReturn(AgreementDocuments.builder().id(1L).build());
+        
+        mockMvc.perform(get("/documents/agreementDocument/1/show"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("agreement/documentDetails"))
+                .andExpect(model().attributeExists("document"));
     }
 }

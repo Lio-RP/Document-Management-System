@@ -4,9 +4,10 @@ import com.springframework.documentmanagementsystem.services.AgreementDocumentsS
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/Documents/agreementDocuments")
+@RequestMapping("/documents")
 @Controller
 public class AgreementController {
 
@@ -16,9 +17,15 @@ public class AgreementController {
         this.agreementDocumentsServices = agreementDocumentsServices;
     }
 
-    @GetMapping
+    @GetMapping("/agreementDocuments")
     public String getDocuments(Model model){
         model.addAttribute("listDocuments", agreementDocumentsServices.findAll());
-        return "agreement/index";
+        return "agreement/agreementDocumentList";
+    }
+
+    @GetMapping("/agreementDocument/{id}/show")
+    public String showDocument(@PathVariable Long id, Model model){
+        model.addAttribute("document", agreementDocumentsServices.findById(id));
+        return "agreement/documentDetails";
     }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'documents')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Agreement Document</title>
+</head>
+<body>
+<br>
+    <h1 th:text="'Agreement Document'">Index Page.....</h1>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th style="color: white">Reg.Number</th>
+                <th style="color: white">Reg.Date</th>
+                <th style="width: 200px; color: white">Type-Document</th>
+                <th style="width: 200px; color: white">State-Document</th>
+                <th style="width: 150px; color: white">Prepared-Person</th>
+                <th style="width: 150px; color: white">Executed-Person</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="document : ${listDocuments}">
+
+                <td>
+                    <a href="#" th:href="@{'/documents/agreementDocument/' + ${document.getId()} + '/show'}" th:text="${document.registrationNumber}" ></a>
+                </td>
+                <td th:text="${document.registrationDate}"></td>
+                <td th:text="${document.typeDocument}"></td>
+                <td th:text="${document.stateDocument}"></td>
+                <td th:text="${document.getPreparedPerson().firstName + ' ' + document.getPreparedPerson().lastName} "></td>
+                <td th:text="${document.getSingedPerson().firstName + ' ' + document.getSingedPerson().lastName}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+<a href="#" th:href="@{'/documents/agreementDocument/new'}" class="btn btn-primary">Add Document</a>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'documents')}">
+<head>
+    <meta charset="UTF-8">
+    <title>View Agreement Document</title>
+</head>
+<body>
+    <h2>Agreement Document Information</h2>
+
+
+    <table class="table table-striped table-bordered table-hover" th:object="${document}" >
+        <tr>
+            <th>Registration Number</th>
+            <td><b th:text="*{registrationNumber}"></b></td>
+        </tr>
+        <tr>
+            <th>Registration Date</th>
+            <td th:text="*{registrationDate}"></td>
+        </tr>
+        <tr>
+            <th>Type Document</th>
+            <td th:text="*{typeDocument}"></td>
+        </tr>
+        <tr>
+            <th>State Document</th>
+            <td th:text="*{stateDocument}"></td>
+        </tr>
+        <tr>
+            <th>Singed By</th>
+            <td th:text="${document.getSingedPerson().firstName + ' ' + document.getSingedPerson().lastName}"></td>
+        </tr>
+        <tr>
+            <th>Prepared By</th>
+            <td th:text="${document.getPreparedPerson().firstName + ' ' + document.getPreparedPerson().lastName}"></td>
+        </tr>
+        <tr>
+            <th>Type Agreement</th>
+            <td th:text="*{typeAgreement}"></td>
+        </tr>
+        <tr>
+            <th>Deadline Agreement</th>
+            <td th:text="*{deadlineAgreement}"></td>
+        </tr>
+        <tr>
+            <th>Contractor</th>
+            <td th:text="*{contractor}"></td>
+        </tr>
+        <tr>
+            <th>Amount</th>
+            <td th:text="*{amount}"></td>
+        </tr>
+        <tr>
+            <th>Number Of Sheets</th>
+            <td th:text="*{numberSheets}"></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td th:text="*{summery}"></td>
+        </tr>
+    </table>
+
+    <a href="#" th:href="@{'/documents/agreementDocument/' + ${id} + '/edit'}" class="btn btn-primary">Edit Document</a>
+    <a href="#" th:href="@{'/documents/agreementDocument/' + ${id} + '/delete'}" class="btn btn-primary">Delete Document</a>
+</body>
+</html>
