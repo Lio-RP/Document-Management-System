@@ -17,6 +17,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -63,5 +66,37 @@ class ServiceControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("service/serviceDocumentList"))
                 .andExpect(model().attribute("listDocuments", hasSize(2)));
+    }
+
+    @Test
+    void showDocument() throws Exception {
+        when(serviceDocumentsServices.findById(anyLong()))
+                .thenReturn(ServiceDocuments.builder().id(1L).build());
+
+        mockMvc.perform(get("/documents/serviceDocuments/1/show"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("service/documentDetails"))
+                .andExpect(model().attributeExists("document"));
+
+        verify(serviceDocumentsServices).findById(anyLong());
+    }
+
+    @Test
+    void initFindForm() throws Exception {
+
+        mockMvc.perform(get("/documents/serviceDocuments/find"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("service/findDocument"))
+                .andExpect(model().attributeExists("document"));
+    }
+
+    @Test
+    void processFindDocumentForm() throws Exception {
+        when(serviceDocumentsServices.findByRegistrationNumber(anyInt()))
+                .thenReturn(ServiceDocuments.builder().id(1L).build());
+
+        mockMvc.perform(get("/documents/serviceDocuments"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/documents/serviceDocuments/1/show"));
     }
 }

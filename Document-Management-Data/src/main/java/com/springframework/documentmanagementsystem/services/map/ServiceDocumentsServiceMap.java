@@ -60,4 +60,10 @@ public class ServiceDocumentsServiceMap extends AbstractServiceMap<ServiceDocume
     public void deleteById(Long id) {
         super.deleteById(id);
     }
+
+    @Override
+    public ServiceDocuments findByRegistrationNumber(int registrationNumber) {
+        //TO DO.....
+        return null;
+    }
 }

@@ -45,4 +45,9 @@ public class ServiceDocumentsSDJpaService implements ServiceDocumentsServices {
     public void deleteById(Long aLong) {
         serviceDocumentsRepository.deleteById(aLong);
     }
+
+    @Override
+    public ServiceDocuments findByRegistrationNumber(int registrationNumber) {
+        return serviceDocumentsRepository.findByRegistrationNumber(registrationNumber);
+    }
 }

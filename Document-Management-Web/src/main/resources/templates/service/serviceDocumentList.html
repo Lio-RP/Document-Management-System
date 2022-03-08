@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: layout (~{::body},'listDocuments')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'documents')}">
 <head>
     <meta charset="UTF-8">
     <title>Service Document</title>
 </head>
 <body>
+<br>
     <h1 th:text="'Service Document'">Index page......</h1>
 
     <table class="table table-striped">
@@ -22,7 +23,7 @@
         <tbody>
         <tr th:each="document : ${listDocuments}">
 
-            <td><a href="#" th:href="@{'/documents/serviceDocuments/' + ${document.registrationNumber} + '/show'}" th:text="${document.registrationNumber}"></a></td>
+            <td><a href="#" th:href="@{'/documents/serviceDocuments/' + ${document.getId()} + '/show'}" th:text="${document.registrationNumber}"></a></td>
             <td th:text="${document.registrationDate}"></td>
             <td th:text="${document.typeDocument}"></td>
             <td th:text="${document.stateDocument}"></td>
