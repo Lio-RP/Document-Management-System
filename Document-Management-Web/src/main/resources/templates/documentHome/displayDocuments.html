@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'documents')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center m-4">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="card-group">
+                    <div class="card">
+                        <div class="card-header" style="background-color: blue">
+                            <h1 class="card-title">Select The Type Of Document You want</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3 justify-content-center">
+                                <div class="col-md-10">
+                                    <a class="btn btn-primary" href="#" th:href="@{'/documents/agreementDocuments/list'}">Agreement Documents</a>
+                                </div>
+                            </div>
+                            <div class="row mb-3 justify-content-center">
+                                <div class="col-md-10">
+                                    <a class="btn btn-primary" href="#" th:href="@{'/documents/serviceDocuments/list'}">Service Documents</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

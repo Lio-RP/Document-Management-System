@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'listDocuments')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Document</title>
+</head>
+<body>
+    <h1 th:text="'Service Document'">Index page......</h1>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th style="color: white">Reg.Number</th>
+            <th style="color: white">Reg.Date</th>
+            <th style="width: 200px; color: white">Type Document</th>
+            <th style="width: 200px; color: white">State Document</th>
+            <th style="width: 150px; color: white">Prepared By</th>
+            <th style="width: 150px; color: white">Signed By</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="document : ${listDocuments}">
+
+            <td><a href="#" th:href="@{'/documents/serviceDocuments/' + ${document.registrationNumber} + '/show'}" th:text="${document.registrationNumber}"></a></td>
+            <td th:text="${document.registrationDate}"></td>
+            <td th:text="${document.typeDocument}"></td>
+            <td th:text="${document.stateDocument}"></td>
+            <td th:text="${document.preparedPerson}"></td>
+            <td th:text="${document.signedPerson}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+    <a href="#" th:href="@{'/documents/serviceDocuments/new'}" class="btn btn-primary">Add Document</a>
+</body>
+</html>

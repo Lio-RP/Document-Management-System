@@ -35,12 +35,29 @@
             color: #5fa134;
 
         }
+        ul li a span{
+            color: white;
+        }
+        .active{
+            color: white !important;
+            background-color: #5fa134 !important;
+        }
+        .navbar-nav li{
+            margin: 0 5px;
+            padding: 0 10px;
+        }
+        .dropdown-item span{
+            color: black;
+        }
+        .dropdown-item:hover{
+            background-color: blue;
+        }
     </style>
 
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background-color: rgb(24,46,94)">
+    <nav class="navbar navbar-expand-lg navbar-dark py-2" style="background-color: rgb(24,46,94)">
         <a class="navbar-brand" href="#"
            th:href="@{'/'}"
            style="font-size: 40px; font-weight:bold; font-family: SansSerif">Document MS</a>
@@ -67,39 +84,20 @@
                     </a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span th:text="DOCUMENTS">Documents</span>
+                <li class="nav-item mx-3" th:class="${'documents'==menu ? 'active' : ''}">
+                    <a class="nav-link" href="#"
+                       th:href="@{'/documents'}">
+                        <span th:text="DOCUMENTS">DOCUMENTS</span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#"
-                            th:href="@{'/documents/agreementDocuments/list'}">
-                            <span th:text="'Agreement Document'">Agreement Document</span>
-                        </a>
-                        <a class="dropdown-item"
-                           th:href="@{'/documents/serviceDocuments/list'}" href="#">
-                            <span th:text="'Service Document'">Service Document</span>
-                        </a>
-                    </div>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span th:text="'FIND DOCUMENT'">Find Documents</span>
+                <li class="nav-item mx-3" th:class="${'findDocument'==menu ? 'active' : ''}">
+                    <a class="nav-link" href="#"
+                       th:href="@{'/documents/find'}">
+                        <span th:text="'FIND DOCUMENTS'">FIND DOCUMENTS</span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#"
-                           th:href="@{'/documents/agreementDocuments/find'}">
-                            <span th:text="'Agreement Document'">Agreement Document</span>
-                        </a>
-                        <a class="dropdown-item"
-                           th:href="@{'/documents/serviceDocuments/find'}" href="#">
-                            <span th:text="'Service Document'">Service Document</span>
-                        </a>
-                    </div>
                 </li>
+
             </ul>
         </div>
     </nav>

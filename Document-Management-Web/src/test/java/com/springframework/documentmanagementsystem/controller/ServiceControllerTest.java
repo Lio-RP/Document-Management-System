@@ -59,20 +59,9 @@ class ServiceControllerTest {
 
         when(serviceDocumentsServices.findAll()).thenReturn(serviceDocumentsSet);
 
-        mockMvc.perform(get("/service"))
+        mockMvc.perform(get("/documents/serviceDocuments/list"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("service/index"))
-                .andExpect(model().attribute("listDocuments", hasSize(2)));
-    }
-
-    @Test
-    void getDocumentsByIndex() throws Exception {
-
-        when(serviceDocumentsServices.findAll()).thenReturn(serviceDocumentsSet);
-
-        mockMvc.perform(get("/service/index"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("service/index"))
+                .andExpect(view().name("service/serviceDocumentList"))
                 .andExpect(model().attribute("listDocuments", hasSize(2)));
     }
 }

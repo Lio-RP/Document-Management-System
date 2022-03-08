@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("service")
+@RequestMapping("/documents/serviceDocuments")
 @Controller
 public class ServiceController {
 
@@ -15,9 +15,9 @@ public class ServiceController {
         this.serviceDocumentsServices = serviceDocumentsServices;
     }
 
-    @RequestMapping({"", "/", "/index", "/index.html"})
+    @RequestMapping("/list")
     public String getDocuments(Model model){
         model.addAttribute("listDocuments", serviceDocumentsServices.findAll());
-        return "service/index";
+        return "service/serviceDocumentList";
     }
 }
