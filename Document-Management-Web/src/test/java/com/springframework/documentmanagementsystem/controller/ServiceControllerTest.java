@@ -175,4 +175,14 @@ class ServiceControllerTest {
 
         verify(serviceDocumentsServices).save(any());
     }
+
+    @Test
+    void deleteDocument() throws Exception {
+
+        mockMvc.perform(get("/documents/serviceDocuments/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/documents/serviceDocuments/list"));
+
+        verify(serviceDocumentsServices).deleteById(anyLong());
+    }
 }

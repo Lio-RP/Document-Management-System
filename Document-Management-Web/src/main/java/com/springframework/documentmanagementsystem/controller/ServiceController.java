@@ -120,4 +120,10 @@ public class ServiceController {
             return "redirect:/documents/serviceDocuments/" + savedDoc.getId() + "/show";
         }
     }
+
+    @GetMapping("/{id}/delete")
+    public String deleteDocument(@PathVariable Long id){
+        serviceDocumentsServices.deleteById(id);
+        return "redirect:/documents/serviceDocuments/list";
+    }
 }
