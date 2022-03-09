@@ -1,0 +1,26 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'posts')}">
+<body>
+    <br>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th style="width: 300px; color: white">Subject</th>
+            <th style="width: 150px; color: white">Sender</th>
+            <th style="width: 150px; color: white">Receiver</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${listPosts}">
+
+            <td>
+                <a href="#" th:href="@{'/posts/' + ${post.getId()} + '/show'}" th:text="${post.subject}" ></a>
+            </td>
+            <td th:text="${post.sender}"></td>
+            <td th:text="${post.receiver}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="#" th:href="@{'/posts/new'}" class="btn btn-primary">Create Post</a>
+</body>
+</html>

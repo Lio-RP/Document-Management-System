@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Getter
@@ -36,5 +37,6 @@ public class Message extends BaseEntity{
     private String subject;
 
     @Column(name = "message")
+    @Lob
     private String message;
 }

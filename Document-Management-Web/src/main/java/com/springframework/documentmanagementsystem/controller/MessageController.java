@@ -1,6 +1,8 @@
 package com.springframework.documentmanagementsystem.controller;
 
+import com.springframework.documentmanagementsystem.services.MessageServices;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,9 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MessageController {
 
-    @GetMapping("/listPosts")
-    public String getMessages(){
+    private final MessageServices messageServices;
 
-        return "messages/index";
+    public MessageController(MessageServices messageServices) {
+        this.messageServices = messageServices;
+    }
+
+    @GetMapping("/listPosts")
+    public String getMessages(Model model){
+        model.addAttribute("listPosts", messageServices.findAll());
+        return "messages/posts";
     }
 }
