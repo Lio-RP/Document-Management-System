@@ -11,10 +11,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -48,5 +52,52 @@ class MessageControllerTest {
                 .andExpect(status().is(200))
                 .andExpect(view().name("messages/posts"))
                 .andExpect(model().attribute("listPosts", hasSize(2)));
+    }
+
+    @Test
+    void showPost() throws Exception {
+        when(postService.findById(anyLong())).thenReturn(Message.builder().id(1L).build());
+
+        mockMvc.perform(get("/posts/1/show"))
+                .andExpect(status().is(200))
+                .andExpect(view().name("messages/postDetails"))
+                .andExpect(model().attributeExists("post"));
+
+        verify(postService).findById(anyLong());
+    }
+
+    @Test
+    void initFindForm() throws Exception {
+
+        mockMvc.perform(get("/posts/find"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("messages/findPost"))
+                .andExpect(model().attributeExists("post"));
+    }
+
+    @Test
+    void processFindPostFormReturningOne() throws Exception {
+        when(postService.findBySubjectLike(anyString()))
+                .thenReturn(Arrays.asList(Message.builder().id(1L).build()));
+
+        mockMvc.perform(get("/posts"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/posts/1/show"));
+
+        verify(postService).findBySubjectLike(anyString());
+    }
+
+    @Test
+    void processFindPostFormReturningMany() throws Exception {
+        when(postService.findBySubjectLike(anyString()))
+                .thenReturn(Arrays.asList(Message.builder().id(1L).build(),
+                        Message.builder().id(2L).build()));
+
+        mockMvc.perform(get("/posts"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("messages/posts"))
+                .andExpect(model().attributeExists("listPosts"));
+
+        verify(postService).findBySubjectLike(anyString());
     }
 }
