@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -47,8 +48,8 @@ public class MessageSDJpaService implements MessageServices {
     }
 
     @Override
-    public Message findBySubject(String subject) {
-        return postsRepository.findBySubject(subject).orElse(null);
+    public List<Message> findBySubjectLike(String subject) {
+        return postsRepository.findBySubjectLike(subject);
     }
 
     @Override

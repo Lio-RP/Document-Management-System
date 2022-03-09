@@ -9,9 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -101,14 +99,16 @@ class MessageSDJpaServiceTest {
 
     @Test
     void findBySubject(){
-        Message message = Message.builder().id(1L).subject("Activation License").build();
         
-        when(postsRepository.findBySubject(any())).thenReturn(Optional.of(message));
+        when(postsRepository.findBySubjectLike(any()))
+                .thenReturn(Arrays.asList(Message.builder().id(1L).subject("Activation License").build(),
+                Message.builder().id(2L).subject("Activation License").build()));
 
-        Message foundedPostBySub = postJpaService.findBySubject("Activation License");
+        List<Message> foundedPostBySub = postJpaService.findBySubjectLike("Activation License");
 
-        assertEquals("Activation License", foundedPostBySub.getSubject());
-        verify(postsRepository, times(1)).findBySubject(any());
+        assertEquals("Activation License", foundedPostBySub.iterator().next().getSubject());
+        assertEquals(2, foundedPostBySub.size());
+        verify(postsRepository, times(1)).findBySubjectLike(any());
     }
 
     @Test

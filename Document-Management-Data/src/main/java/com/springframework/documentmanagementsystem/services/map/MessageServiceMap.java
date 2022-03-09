@@ -5,6 +5,9 @@ import com.springframework.documentmanagementsystem.services.MessageServices;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -38,16 +41,16 @@ public class MessageServiceMap extends AbstractServiceMap<Message, Long> impleme
     }
 
     @Override
-    public Message findBySubject(String subject) {
-        boolean message;
-        Set<Message> posts = this.findAll();
-        for(Message post : posts){
-            message = post.getSubject().equalsIgnoreCase(subject);
-            if(message){
-                return post;
+    public List<Message> findBySubjectLike(String subject) {
+        Set<Message> foundPosts = new HashSet<>();
+;
+        for(Message post : this.findAll()){
+            if(post.getSubject().equalsIgnoreCase(subject)){
+                foundPosts.add(post);
             }
         }
-        return null;
+        List<Message> posts = new ArrayList<>(foundPosts);
+        return posts;
     }
 
     @Override

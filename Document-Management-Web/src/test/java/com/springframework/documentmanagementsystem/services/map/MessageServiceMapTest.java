@@ -4,6 +4,7 @@ import com.springframework.documentmanagementsystem.models.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -64,9 +65,9 @@ class MessageServiceMapTest {
     @Test
     void findBySubject() {
 
-        Message foundedPostBySub = posts.findBySubject("activation license");
+        List<Message> foundedPostBySub = posts.findBySubjectLike("activation license");
 
-        assertEquals("Activation License", foundedPostBySub.getSubject());
+        assertEquals("Activation License", foundedPostBySub.iterator().next().getSubject());
     }
 
     @Test
