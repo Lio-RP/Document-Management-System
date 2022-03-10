@@ -4,11 +4,9 @@ import com.springframework.documentmanagementsystem.models.Message;
 import com.springframework.documentmanagementsystem.services.MessageServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -69,6 +67,42 @@ public class MessageController {
             //found more
             model.addAttribute("listPosts", postResult);
             return "messages/posts";
+        }
+    }
+
+    @GetMapping("/new")
+    public String initCreationForm(Model model){
+        model.addAttribute("post", Message.builder().build());
+        return "messages/createOrUpdatePost";
+    }
+
+    @PostMapping("/new")
+    public String processCreationPostForm(@ModelAttribute Message message, BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("post", message);
+            return "messages/createOrUpdatePost";
+        }else{
+            Message savedMessage = messageServices.save(message);
+            return "redirect:/posts/" + savedMessage.getId() + "/show";
+        }
+    }
+
+    @GetMapping("/{id}/edit")
+    public String initUpdatePostForm(@PathVariable Long id, Model model){
+        model.addAttribute("post", messageServices.findById(id));
+        return "messages/createOrUpdatePost";
+    }
+
+    @PostMapping("{id}/edit")
+    public String processUpdatePostForm(@ModelAttribute Message message, BindingResult result,
+                                        Model model, @PathVariable Long id){
+        if(result.hasErrors()){
+            model.addAttribute("post", message);
+            return "messages/createOrUpdatePost";
+        }else{
+            message.setId(id);
+            messageServices.save(message);
+            return "redirect:/posts/" + message.getId() + "/show";
         }
     }
 }

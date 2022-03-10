@@ -1,5 +1,7 @@
 package com.springframework.documentmanagementsystem.services.springdatajpa;
 
+import com.springframework.documentmanagementsystem.converters.MessageDtosToMessage;
+import com.springframework.documentmanagementsystem.converters.MessageToMessageDtos;
 import com.springframework.documentmanagementsystem.models.Message;
 import com.springframework.documentmanagementsystem.repositories.PostsRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +28,12 @@ class MessageSDJpaServiceTest {
 
     @InjectMocks
     MessageSDJpaService postJpaService;
+
+    @Mock
+    MessageDtosToMessage convertToMessage;
+
+    @Mock
+    MessageToMessageDtos convertToMessageDtos;
 
 
     Set<Message> messages;

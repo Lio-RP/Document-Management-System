@@ -5,6 +5,7 @@ import com.springframework.documentmanagementsystem.services.MessageServices;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -99,5 +101,47 @@ class MessageControllerTest {
                 .andExpect(model().attributeExists("listPosts"));
 
         verify(postService).findBySubjectLike(anyString());
+    }
+
+    @Test
+    void initCreationPostForm() throws Exception {
+
+        mockMvc.perform(get("/posts/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("messages/createOrUpdatePost"))
+                .andExpect(model().attributeExists("post"));
+    }
+
+    @Test
+    void processCreationPostForm() throws Exception {
+        when(postService.save(ArgumentMatchers.any())).thenReturn(Message.builder().id(1L).build());
+
+        mockMvc.perform(post("/posts/new"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/posts/1/show"));
+
+        verify(postService).save(ArgumentMatchers.any());
+    }
+
+    @Test
+    void initUpdatePostForm() throws Exception {
+        when(postService.findById(anyLong())).thenReturn(Message.builder().id(1L).build());
+
+        mockMvc.perform(get("/posts/1/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("messages/createOrUpdatePost"));
+
+        verify(postService).findById(anyLong());
+    }
+
+    @Test
+    void processUpdatePostForm() throws Exception {
+        when(postService.save(ArgumentMatchers.any())).thenReturn(Message.builder().id(1L).build());
+
+        mockMvc.perform(post("/posts/1/edit"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/posts/1/show"));
+
+        verify(postService).save(ArgumentMatchers.any());
     }
 }

@@ -1,5 +1,7 @@
 package com.springframework.documentmanagementsystem.services.springdatajpa;
 
+import com.springframework.documentmanagementsystem.converters.MessageDtosToMessage;
+import com.springframework.documentmanagementsystem.converters.MessageToMessageDtos;
 import com.springframework.documentmanagementsystem.models.Message;
 import com.springframework.documentmanagementsystem.repositories.PostsRepository;
 import com.springframework.documentmanagementsystem.services.MessageServices;
@@ -15,13 +17,18 @@ import java.util.Set;
 public class MessageSDJpaService implements MessageServices {
 
     private final PostsRepository postsRepository;
+    private final MessageDtosToMessage convertToMessage;
+    private final MessageToMessageDtos convertToMessageDtos;
 
-    public MessageSDJpaService(PostsRepository postsRepository) {
+    public MessageSDJpaService(PostsRepository postsRepository, MessageDtosToMessage convertToMessage, MessageToMessageDtos convertToMessageDtos) {
         this.postsRepository = postsRepository;
+        this.convertToMessage = convertToMessage;
+        this.convertToMessageDtos = convertToMessageDtos;
     }
 
     @Override
     public Message save(Message object) {
+
         return postsRepository.save(object);
     }
 
