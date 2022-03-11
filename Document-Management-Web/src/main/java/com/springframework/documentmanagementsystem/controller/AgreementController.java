@@ -14,7 +14,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -108,8 +107,8 @@ public class AgreementController {
 
         //set date and times:
         //To do................
-        agreementDocuments.setRegistrationDate(LocalDate.now());
-        agreementDocuments.setDeadlineAgreement(LocalDate.now());
+        //agreementDocuments.setRegistrationDate(LocalDate.now());
+        //agreementDocuments.setDeadlineAgreement(LocalDate.now());
 
         model.addAttribute("document", agreementDocuments);
         return "agreement/createOrUpdateDocument";

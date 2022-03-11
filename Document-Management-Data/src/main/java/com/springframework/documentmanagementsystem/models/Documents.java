@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -36,6 +37,7 @@ public class Documents extends BaseEntity{
     private int registrationNumber;
 
     @Column(name = "registration_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registrationDate;
 
     @Column(name = "type_document")

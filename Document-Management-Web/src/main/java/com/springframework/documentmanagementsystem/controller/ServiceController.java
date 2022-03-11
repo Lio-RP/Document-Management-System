@@ -13,7 +13,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.Set;
 
 @RequestMapping("/documents/serviceDocuments")
@@ -80,7 +79,7 @@ public class ServiceController {
         serviceDoc.setSignedPerson(new SignedPerson());
 
         //set the date
-        serviceDoc.setRegistrationDate(LocalDate.now());
+        //serviceDoc.setRegistrationDate(LocalDate.now());
 
         //add to the model
         model.addAttribute("document", serviceDoc);

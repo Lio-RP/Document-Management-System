@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,6 +38,7 @@ public class AgreementDocuments extends Documents{
     private String typeAgreement;
 
     @Column(name = "deadline_agreement")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate deadlineAgreement;
 
     @Column(name = "contractor")
