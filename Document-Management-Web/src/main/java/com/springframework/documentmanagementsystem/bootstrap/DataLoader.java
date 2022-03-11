@@ -5,6 +5,7 @@ import com.springframework.documentmanagementsystem.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Component
@@ -51,14 +52,14 @@ public class DataLoader implements CommandLineRunner {
         PreparedPerson savedPreparedPerson = preparedPersonServices.save(preparedPerson);
 
         AgreementDocuments agreementDocuments1 = new AgreementDocuments();
-        agreementDocuments1.setRegistrationNumber(101);
+        agreementDocuments1.setRegistrationNumber(1234);
         agreementDocuments1.setRegistrationDate(LocalDate.now());
         agreementDocuments1.setTypeDocument("Agreement");
         agreementDocuments1.setStateDocument("Registering");
         agreementDocuments1.setTypeAgreement("Order Services");
         agreementDocuments1.setDeadlineAgreement(LocalDate.now());
         agreementDocuments1.setContractor("Hormuud Company");
-        agreementDocuments1.setAmount((long) 234.5);
+        agreementDocuments1.setAmount(new BigDecimal(2555));
         agreementDocuments1.setSignedPerson(signedPerson);
         agreementDocuments1.setPreparedPerson(preparedPerson);
         agreementDocuments1.setNumberSheets(4);
@@ -75,7 +76,7 @@ public class DataLoader implements CommandLineRunner {
         agreementDocuments2.setTypeAgreement("Order Services");
         agreementDocuments2.setDeadlineAgreement(LocalDate.now());
         agreementDocuments2.setContractor("Somtel Company");
-        agreementDocuments2.setAmount((long) 23445.55);
+        agreementDocuments2.setAmount(new BigDecimal(25567));
         agreementDocuments2.setSignedPerson(signedPerson);
         agreementDocuments2.setPreparedPerson(preparedPerson);
         agreementDocuments2.setNumberSheets(4);

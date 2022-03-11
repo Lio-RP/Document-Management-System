@@ -134,11 +134,27 @@ class ServiceControllerTest {
     void processCreationDocumentForm() throws Exception {
         when(serviceDocumentsServices.save(any())).thenReturn(ServiceDocuments.builder().id(1L).build());
 
-        mockMvc.perform(post("/documents/serviceDocuments/new"))
+        mockMvc.perform(post("/documents/serviceDocuments/new")
+                        .param("id", "1")
+                        .param("registrationNumber", "1234")
+                        .param("registrationDate","2022-03-11")
+                        .param("typeDocument", "Agreement Document")
+                        .param("stateDocument", "Registering")
+                        .param("numberSheets","3")
+                        .param("summery","Some Summery"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/documents/serviceDocuments/1/show"));
 
         verify(serviceDocumentsServices).save(any());
+    }
+
+    @Test
+    void processCreationDocumentFormValidationFails() throws Exception {
+
+        mockMvc.perform(post("/documents/serviceDocuments/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("service/createOrUpdateDocument"));
+
     }
 
     @Test
@@ -169,11 +185,27 @@ class ServiceControllerTest {
     void processUpdateDocumentForm() throws Exception {
         when(serviceDocumentsServices.save(any())).thenReturn(ServiceDocuments.builder().id(1L).build());
 
-        mockMvc.perform(post("/documents/serviceDocuments/1/edit"))
+        mockMvc.perform(post("/documents/serviceDocuments/1/edit")
+                        .param("id", "1")
+                        .param("registrationNumber", "1234")
+                        .param("registrationDate","2022-03-11")
+                        .param("typeDocument", "Agreement Document")
+                        .param("stateDocument", "Registering")
+                        .param("numberSheets","3")
+                        .param("summery","Some Summery"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/documents/serviceDocuments/1/show"));
 
         verify(serviceDocumentsServices).save(any());
+    }
+
+    @Test
+    void processUpdateDocumentFormValidationFails() throws Exception {
+
+        mockMvc.perform(post("/documents/serviceDocuments/1/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("service/createOrUpdateDocument"));
+
     }
 
     @Test

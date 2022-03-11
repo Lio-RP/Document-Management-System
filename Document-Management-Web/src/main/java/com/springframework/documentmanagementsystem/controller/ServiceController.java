@@ -19,6 +19,7 @@ import java.util.Set;
 @Controller
 public class ServiceController {
 
+    public static final String SERVICE_CREATE_OR_UPDATE_DOCUMENT_FORM = "service/createOrUpdateDocument";
     private final ServiceDocumentsServices serviceDocumentsServices;
     private final PreparedPersonServices preparedPersonServices;
     private final SignedPersonServices signedPersonServices;
@@ -74,24 +75,20 @@ public class ServiceController {
     public String initCreationForm(Model model){
         ServiceDocuments serviceDoc = ServiceDocuments.builder().build();
 
-        //init working usera:
+        //init working users:
         serviceDoc.setPreparedPerson(new PreparedPerson());
         serviceDoc.setSignedPerson(new SignedPerson());
 
-        //set the date
-        //serviceDoc.setRegistrationDate(LocalDate.now());
-
         //add to the model
         model.addAttribute("document", serviceDoc);
-        return "service/createOrUpdateDocument";
+        return SERVICE_CREATE_OR_UPDATE_DOCUMENT_FORM;
     }
 
     @PostMapping("/new")
-    public String processCreationDocumentForm(@Valid ServiceDocuments serviceDoc,
+    public String processCreationDocumentForm(@Valid @ModelAttribute("document") ServiceDocuments serviceDoc,
                                               BindingResult result, Model model){
         if(result.hasErrors()){
-            model.addAttribute("document", serviceDoc);
-            return "service/createOrUpdateDocument";
+            return SERVICE_CREATE_OR_UPDATE_DOCUMENT_FORM;
         }else{
             ServiceDocuments savedDoc = serviceDocumentsServices.save(serviceDoc);
             return "redirect:/documents/serviceDocuments/" + savedDoc.getId() + "/show";
@@ -102,17 +99,16 @@ public class ServiceController {
     public String initUpdateDocumentForm(@PathVariable Long id, Model model){
         ServiceDocuments foundedDoc = serviceDocumentsServices.findById(id);
         model.addAttribute("document", foundedDoc);
-        return "service/createOrUpdateDocument";
+        return SERVICE_CREATE_OR_UPDATE_DOCUMENT_FORM;
     }
 
     @PostMapping("/{id}/edit")
-    public String processUpdateDocumentForm(@Valid ServiceDocuments serviceDoc,
-                                            Model model,
+    public String processUpdateDocumentForm(@Valid @ModelAttribute("document") ServiceDocuments serviceDoc,
                                             BindingResult result,
+                                            Model model,
                                             @PathVariable Long id){
         if(result.hasErrors()){
-            model.addAttribute("document", serviceDoc);
-            return "service/createOrUpdateDocument";
+            return SERVICE_CREATE_OR_UPDATE_DOCUMENT_FORM;
         }else{
             serviceDoc.setId(id);
             ServiceDocuments savedDoc = serviceDocumentsServices.save(serviceDoc);

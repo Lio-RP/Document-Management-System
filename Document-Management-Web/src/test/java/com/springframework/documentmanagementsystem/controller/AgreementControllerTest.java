@@ -143,11 +143,31 @@ class AgreementControllerTest {
     void processCreationDocumentForm() throws Exception {
         when(agreementDocumentsServices.save(any())).thenReturn(AgreementDocuments.builder().id(1L).build());
 
-        mockMvc.perform(post("/documents/agreementDocuments/new"))
+        mockMvc.perform(post("/documents/agreementDocuments/new")
+                        .param("id", "1")
+                        .param("registrationNumber", "1234")
+                        .param("registrationDate","2022-03-11")
+                        .param("typeDocument", "Agreement Document")
+                        .param("stateDocument", "Registering")
+                        .param("numberSheets","3")
+                        .param("summery","Some Summery")
+                        .param("typeAgreement", "Service for company")
+                        .param("deadlineAgreement", "2022-04-12")
+                        .param("contractor", "Hormuud Company")
+                        .param("amount", "12345"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/documents/agreementDocuments/1/show"));
 
         verify(agreementDocumentsServices).save(any());
+
+    }
+
+    @Test
+    void processCreationDocumentFormValidationFail() throws Exception {
+
+        mockMvc.perform(post("/documents/agreementDocuments/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("agreement/createOrUpdateDocument"));
 
     }
 
@@ -182,7 +202,18 @@ class AgreementControllerTest {
     void processUpdateDocumentForm() throws Exception {
         when(agreementDocumentsServices.save(any())).thenReturn(AgreementDocuments.builder().id(1L).build());
 
-        mockMvc.perform(post("/documents/agreementDocuments/1/edit"))
+        mockMvc.perform(post("/documents/agreementDocuments/1/edit")
+                        .param("id", "1")
+                        .param("registrationNumber", "1234")
+                        .param("registrationDate","2022-03-11")
+                        .param("typeDocument", "Agreement Document")
+                        .param("stateDocument", "Registering")
+                        .param("numberSheets","3")
+                        .param("summery","Some Summery")
+                        .param("typeAgreement", "Service for company")
+                        .param("deadlineAgreement", "2022-04-12")
+                        .param("contractor", "Hormuud Company")
+                        .param("amount", "12345"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/documents/agreementDocuments/1/show"));
 
@@ -190,6 +221,16 @@ class AgreementControllerTest {
 
         verify(agreementDocumentsServices).save(argument.capture());
         assertEquals(1, argument.getValue().getId());
+
+    }
+
+    @Test
+    void processUpdateDocumentFormValidationFail() throws Exception {
+
+        mockMvc.perform(post("/documents/agreementDocuments/1/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("agreement/createOrUpdateDocument"));
+
 
     }
 

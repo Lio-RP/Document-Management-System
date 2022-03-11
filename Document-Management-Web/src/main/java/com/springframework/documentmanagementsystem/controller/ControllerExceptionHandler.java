@@ -19,4 +19,15 @@ public class ControllerExceptionHandler {
 
         return mav;
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NullPointerException.class)
+    public ModelAndView handleNPE(Exception exception){
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", exception);
+        mav.setViewName("400Error");
+
+        return mav;
+    }
 }

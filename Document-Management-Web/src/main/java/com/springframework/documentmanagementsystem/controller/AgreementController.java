@@ -22,6 +22,7 @@ import java.util.Set;
 @Controller
 public class AgreementController {
 
+    public static final String AGREEMENT_CREATE_OR_UPDATE_DOCUMENT_FORM = "agreement/createOrUpdateDocument";
     private final AgreementDocumentsServices agreementDocumentsServices;
     private final PreparedPersonServices preparedPersonServices;
     private final SignedPersonServices signedPersonServices;
@@ -105,20 +106,16 @@ public class AgreementController {
         //init SignedPerson
         agreementDocuments.setSignedPerson(new SignedPerson());
 
-        //set date and times:
-        //To do................
-        //agreementDocuments.setRegistrationDate(LocalDate.now());
-        //agreementDocuments.setDeadlineAgreement(LocalDate.now());
-
         model.addAttribute("document", agreementDocuments);
         return "agreement/createOrUpdateDocument";
     }
 
     @PostMapping("/new")
-    public String processCreationDocumentForm(@Valid AgreementDocuments agreementDoc, BindingResult result, Model model){
+    public String processCreationDocumentForm(@Valid @ModelAttribute("document") AgreementDocuments agreementDoc,
+                                              BindingResult result,
+                                              Model model){
         if(result.hasErrors()){
-            model.addAttribute("document", AgreementDocuments.builder().build());
-            return "agreement/createOrUpdateDocument";
+            return AGREEMENT_CREATE_OR_UPDATE_DOCUMENT_FORM;
         }else{
             log.debug("in the process to save...............................");
             AgreementDocuments savedDoc = agreementDocumentsServices.save(agreementDoc);
@@ -129,16 +126,15 @@ public class AgreementController {
     @GetMapping("/{id}/edit")
     public String initUpdateDocumentForm(@PathVariable Long id, Model model){
         model.addAttribute("document", agreementDocumentsServices.findById(id));
-        return "agreement/createOrUpdateDocument";
+        return AGREEMENT_CREATE_OR_UPDATE_DOCUMENT_FORM;
     }
 
     @PostMapping("/{id}/edit")
-    public String processUpdateDocumentForm(@Valid AgreementDocuments agreementDoc,
-                                            BindingResult result, Model model,
+    public String processUpdateDocumentForm(@Valid @ModelAttribute("document") AgreementDocuments agreementDoc,
+                                            BindingResult result,
                                             @PathVariable Long id){
         if(result.hasErrors()){
-            model.addAttribute("document", agreementDocumentsServices.findById(id));
-            return "agreement/createOrUpdateDocument";
+            return AGREEMENT_CREATE_OR_UPDATE_DOCUMENT_FORM;
         }else{
             agreementDoc.setId(id);
             AgreementDocuments savedDoc = agreementDocumentsServices.save(agreementDoc);

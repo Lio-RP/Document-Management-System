@@ -7,34 +7,66 @@
 <h2>Document</h2>
 
 <form th:object="${document}" method="post">
+
+    <div th:if="${#fields.hasErrors('*')}"  class="alert alert-danger">
+        <p>Please Correct The Errors Below!.</p>
+    </div>
+
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Registration Number</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10" th:class="${#fields.hasErrors('registrationNumber')}
+            ?'col-sm-10 alert-danger':'col-sm-10'">
             <input class="form-control" th:field="*{registrationNumber}" size="30"
-                   maxlength="80" type="number"/>
+                   maxlength="80" type="number" th:errorclass="invalid"/>
+            <span class="form-text" th:if="${#fields.hasErrors('registrationNumber')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('registrationNumber')}" th:text="${err}"></li>
+                    </ul>
+                </span>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Registration Date</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10" th:class="${#fields.hasErrors('registrationDate')}
+            ?'col-sm-10 alert alert-danger':'col-sm-10'">
             <input class="form-control" th:field="*{registrationDate}" size="30"
+                   th:errorclass="invalid"
                    maxlength="80" type="date"
                    placeholder="YYYY-MM-DD" title="Enter a date in this format: YYYY-MM-DD"
                    pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"/>
+            <span class="form-text" th:if="${#fields.hasErrors('registrationDate')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('registraionDate')}" th:text="${err}"></li>
+                    </ul>
+                </span>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Type Document</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10" th:class="${#fields.hasErrors('typeDocument')}
+            ?'col-sm-10 alert-danger':'col-sm-10'">
             <input class="form-control" th:field="*{typeDocument}" size="30"
-                   maxlength="80" type="text"/>
+                   maxlength="80" type="text"
+                   th:errorclass="invalid"/>
+            <span class="form-text" th:if="${#fields.hasErrors('typeDocument')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('typeDocument')}" th:text="${err}"></li>
+                    </ul>
+                </span>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">State Document</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10" th:class="${#fields.hasErrors('stateDocument')}
+                    ?'col-sm-10 alert-danger':'col-sm-10'">
             <input class="form-control" th:field="*{stateDocument}" size="30"
-                   maxlength="80" type="text"/>
+                   maxlength="80" type="text"
+                   th:errorclass="invalid"/>
+            <span class="form-text" th:if="${#fields.hasErrors('stateDocument')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('stateDocument')}" th:text="${err}"></li>
+                    </ul>
+                </span>
         </div>
     </div>
     <div class="form-group row">
@@ -54,24 +86,38 @@
             <select class="form-control" th:field="*{signedPerson}">
                 <option
                         th:each="user : ${listSignedPerson}"
-                        th:value="${user.id}"
-                        th:selected="${user.id.equals(document.preparedPerson.id)}"
-                        th:text="${user.firstName + ' ' + user.lastName}"></option>
+                        th:value="${user}"
+                        th:selected="${user}"
+                        th:text="${user}"></option>
             </select>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">numberSheets</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10" th:class="${#fields.hasErrors('numberSheets')}
+                        ?'col-sm-10 alert-danger':'col-sm-10'">
             <input class="form-control" th:field="*{numberSheets}" size="30"
-                   maxlength="80" type="number"/>
+                   maxlength="80" type="number"
+                   th:errorclass="invalid"/>
+            <span class="form-text" th:if="${#fields.hasErrors('numberSheets')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('numberSheets')}" th:text="${err}"></li>
+                    </ul>
+                </span>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Description</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10" th:class="${#fields.hasErrors('summery')}
+            ?'col-sm-10 alert-danger':'col-sm-10'">
             <input class="form-control" th:field="*{summery}" size="30"
-                   maxlength="80" type="text"/>
+                   maxlength="80" type="text"
+                   th:errorclass="invalid"/>
+            <span class="form-text" th:if="${#fields.hasErrors('summery')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('summery')}" th:text="${err}"></li>
+                    </ul>
+            </span>
         </div>
     </div>
 

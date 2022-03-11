@@ -1,13 +1,15 @@
-/*package com.springframework.documentmanagementsystem.formatters;
+package com.springframework.documentmanagementsystem.formatters;
 
 import com.springframework.documentmanagementsystem.models.SignedPerson;
 import com.springframework.documentmanagementsystem.services.SignedPersonServices;
 import org.springframework.format.Formatter;
+import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.Set;
 
+@Component
 public class SignedPersonFormatter implements Formatter<SignedPerson> {
 
     private final SignedPersonServices signedPersonServices;
@@ -32,4 +34,4 @@ public class SignedPersonFormatter implements Formatter<SignedPerson> {
         }
         throw new ParseException("Singed Person Not Found." + text, 0);
     }
-}*/
+}

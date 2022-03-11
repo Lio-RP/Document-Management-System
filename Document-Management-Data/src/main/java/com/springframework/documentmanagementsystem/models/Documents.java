@@ -6,10 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Getter
@@ -34,6 +35,8 @@ public class Documents extends BaseEntity{
     }
 
     @Column(name = "registration_number")
+    @Min(1)
+    @Max(9999)
     private int registrationNumber;
 
     @Column(name = "registration_date")
@@ -41,9 +44,13 @@ public class Documents extends BaseEntity{
     private LocalDate registrationDate;
 
     @Column(name = "type_document")
+    @NotBlank
+    @Size(min = 5, max = 255)
     private String typeDocument;
 
     @Column(name = "state_document")
+    @NotBlank
+    @Size(min = 5, max = 255)
     private String stateDocument;
 
     @ManyToOne
@@ -55,9 +62,13 @@ public class Documents extends BaseEntity{
     private PreparedPerson preparedPerson;
 
     @Column(name = "number_sheets")
+    @Min(1)
+    @Max(10)
     private int numberSheets;
 
     @Column(name = "summery")
+    @NotBlank
+    @Lob
     private String summery;
 
 }
